@@ -14,6 +14,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <a href="https://www.youtube.com/watch?v=-RtJroTMDf4">Tutorial Help</a>
         <table>
           <caption>Great Ideas</caption>
           <thead>
