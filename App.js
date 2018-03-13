@@ -13,6 +13,18 @@ class App extends Component {
       users : [],
     };
   }
+  componentWillMount() {
+    const previousUsers = this.state.users; // Create copy of current list of users
+    this.db.on('child_added', snap => {
+      previousNotes.push({
+        id: snap.key,
+        name: snap.val().name,
+      })
+      this.setState({
+        users : previousUsers,
+      })
+    });
+  }
   render() {
     return (
       <div className="App">
