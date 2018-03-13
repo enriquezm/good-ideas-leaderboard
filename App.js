@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
 import './App.css';
-import { DB_CONFIG } from './config/config';
+// import { DB_CONFIG } from './config';
 import firebase from 'firebase/app';
+import 'firebase/database';
 import UserEntry from './UserEntry';
 
 class App extends Component {
   constructor() {
     super();
+    // Initialize Firebase
+    const DB_CONFIG = {
+      apiKey: "AIzaSyDOFdqcEKqGypczTSkNdzm7KoSS4w9hUN8",
+      authDomain: "good-ideas-da921.firebaseapp.com",
+      databaseURL: "https://good-ideas-da921.firebaseio.com",
+      projectId: "good-ideas-da921",
+      storageBucket: "good-ideas-da921.appspot.com",
+      messagingSenderId: "661275371854"
+    };
     this.app = firebase.initializeApp(DB_CONFIG);
-    this.db = this.app.database().ref().child('users');
+    this.database = this.app.database().ref().child('users');
     this.state = {
       users : [],
     };
   }
   componentWillMount() {
     const previousUsers = this.state.users; // Create copy of current list of users
-    this.db.on('child_added', snap => {
-      previousNotes.push({
+    this.database.on('child_added', snap => {
+      previousUsers.push({
         id: snap.key,
         name: snap.val().name,
       })
