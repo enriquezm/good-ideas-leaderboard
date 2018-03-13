@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
+import { DB_CONFIG } from './config/config';
+import firebase from 'firebase/app';
 import UserEntry from './UserEntry';
 
 class App extends Component {
   constructor() {
     super();
+    this.app = firebase.initializeApp(DB_CONFIG);
+    this.db = this.app.database().ref().child('users');
     this.state = {
-      users : [
-        { name:"Myles", winCount: 0 },
-      ],
+      users : [],
     };
   }
   render() {
